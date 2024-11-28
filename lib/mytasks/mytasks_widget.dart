@@ -166,6 +166,78 @@ class _MytasksWidgetState extends State<MytasksWidget>
                                               ],
                                             ),
                                           ),
+                                          Card(
+                                            clipBehavior:
+                                                Clip.antiAliasWithSaveLayer,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            elevation: 1.0,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(40.0),
+                                            ),
+                                            child: FutureBuilder<
+                                                List<UserRoleCounts2Row>>(
+                                              future: UserRoleCounts2Table()
+                                                  .queryRows(
+                                                queryFn: (q) => q.eq(
+                                                  'user_id',
+                                                  currentUserUid,
+                                                ),
+                                              ),
+                                              builder: (context, snapshot) {
+                                                // Customize what your widget looks like when it's loading.
+                                                if (!snapshot.hasData) {
+                                                  return Center(
+                                                    child: SizedBox(
+                                                      width: 50.0,
+                                                      height: 50.0,
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                        valueColor:
+                                                            AlwaysStoppedAnimation<
+                                                                Color>(
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primary,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                }
+                                                List<UserRoleCounts2Row>
+                                                    columnUserRoleCounts2RowList =
+                                                    snapshot.data!;
+
+                                                return Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: List.generate(
+                                                      columnUserRoleCounts2RowList
+                                                          .length,
+                                                      (columnIndex) {
+                                                    final columnUserRoleCounts2Row =
+                                                        columnUserRoleCounts2RowList[
+                                                            columnIndex];
+                                                    return Text(
+                                                      columnUserRoleCounts2Row
+                                                          .statusid1Count!
+                                                          .toString(),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Readex Pro',
+                                                            fontSize: 16.0,
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    );
+                                                  }),
+                                                );
+                                              },
+                                            ),
+                                          ),
                                           FutureBuilder<
                                               List<UserRoleCounts2Row>>(
                                             future: UserRoleCounts2Table()
@@ -196,78 +268,34 @@ class _MytasksWidgetState extends State<MytasksWidget>
                                                 );
                                               }
                                               List<UserRoleCounts2Row>
-                                                  columnUserRoleCounts2RowList =
+                                                  cardUserRoleCounts2RowList =
                                                   snapshot.data!;
 
-                                              return Column(
-                                                mainAxisSize: MainAxisSize.max,
-                                                children: List.generate(
-                                                    columnUserRoleCounts2RowList
-                                                        .length, (columnIndex) {
-                                                  final columnUserRoleCounts2Row =
-                                                      columnUserRoleCounts2RowList[
-                                                          columnIndex];
-                                                  return Card(
-                                                    clipBehavior: Clip
-                                                        .antiAliasWithSaveLayer,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryBackground,
-                                                    elevation: 1.0,
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              40.0),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(8.0),
-                                                      child: Text(
-                                                        valueOrDefault<String>(
-                                                          columnUserRoleCounts2Row
-                                                              .statusid1Count
-                                                              ?.toString(),
-                                                          'Counts',
-                                                        ),
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Readex Pro',
-                                                              fontSize: 18.0,
-                                                              letterSpacing:
-                                                                  0.0,
-                                                            ),
-                                                      ),
-                                                    ),
-                                                  );
-                                                }),
-                                              );
-                                            },
-                                          ),
-                                          Card(
-                                            clipBehavior:
-                                                Clip.antiAliasWithSaveLayer,
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryBackground,
-                                            elevation: 1.0,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(40.0),
-                                            ),
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(4.0),
-                                              child: Icon(
-                                                Icons
-                                                    .keyboard_arrow_right_rounded,
+                                              return Card(
+                                                clipBehavior:
+                                                    Clip.antiAliasWithSaveLayer,
                                                 color:
                                                     FlutterFlowTheme.of(context)
+                                                        .primaryBackground,
+                                                elevation: 1.0,
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          40.0),
+                                                ),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(4.0),
+                                                  child: Icon(
+                                                    Icons
+                                                        .keyboard_arrow_right_rounded,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
                                                         .secondaryText,
-                                                size: 24.0,
-                                              ),
-                                            ),
+                                                    size: 24.0,
+                                                  ),
+                                                ),
+                                              );
+                                            },
                                           ),
                                         ],
                                       ),
@@ -387,34 +415,19 @@ class _MytasksWidgetState extends State<MytasksWidget>
                                                           BorderRadius.circular(
                                                               40.0),
                                                     ),
-                                                    child: Visibility(
-                                                      visible:
-                                                          columnUserRoleCounts2Row
-                                                                  .statusid2Count! >
-                                                              0,
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets.all(8.0),
-                                                        child: Text(
-                                                          valueOrDefault<
-                                                              String>(
-                                                            columnUserRoleCounts2Row
-                                                                .statusid2Count
-                                                                ?.toString(),
-                                                            'Complete',
+                                                    child: Text(
+                                                      columnUserRoleCounts2Row
+                                                          .statusid2Count!
+                                                          .toString(),
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily:
+                                                                'Readex Pro',
+                                                            fontSize: 16.0,
+                                                            letterSpacing: 0.0,
                                                           ),
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Readex Pro',
-                                                                fontSize: 18.0,
-                                                                letterSpacing:
-                                                                    0.0,
-                                                              ),
-                                                        ),
-                                                      ),
                                                     ),
                                                   );
                                                 }),

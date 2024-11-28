@@ -216,22 +216,24 @@ dynamic deserializeParam<T>(
       case ParamType.SupabaseRow:
         final data = json.decode(param) as Map<String, dynamic>;
         switch (T) {
-          case TasksAssigneeViewRow:
-            return TasksAssigneeViewRow(data);
-          case UserTasksView2Row:
-            return UserTasksView2Row(data);
           case UserRoleCounts2Row:
             return UserRoleCounts2Row(data);
-          case UserRolesRow:
-            return UserRolesRow(data);
-          case UsersRow:
-            return UsersRow(data);
-          case UserAssignedToRow:
-            return UserAssignedToRow(data);
+          case UserTasksView2Row:
+            return UserTasksView2Row(data);
           case TasksRow:
             return TasksRow(data);
+          case UserAssignedToRow:
+            return UserAssignedToRow(data);
+          case UserRolesRow:
+            return UserRolesRow(data);
           case RolesTableRow:
             return RolesTableRow(data);
+          case TasksAssigneeViewRow:
+            return TasksAssigneeViewRow(data);
+          case UsersRow:
+            return UsersRow(data);
+          case NotificationsRow:
+            return NotificationsRow(data);
           default:
             return null;
         }

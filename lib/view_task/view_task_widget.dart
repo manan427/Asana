@@ -104,7 +104,7 @@ class _ViewTaskWidgetState extends State<ViewTaskWidget> {
                   size: 24.0,
                 ),
                 onPressed: () async {
-                  context.safePop();
+                  context.pushNamed('Mytasks');
                 },
               ),
             ),
